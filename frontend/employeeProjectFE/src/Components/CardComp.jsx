@@ -5,12 +5,6 @@ import axios from "axios";
 import {wait} from "@testing-library/user-event/dist/utils";
 
 
-function deleteEmployee(){
-
-    axios.delete("")
-
-}
-
 
 
 
@@ -18,6 +12,23 @@ function CardComp(props) {
 
 
 
+    function deleteEmployee(){
+
+        axios.delete(`http://localhost:8080/employee/${props.employeeId}`)
+        .then(() => props.checkIfDeleted())
+        .catch(error => {
+            console.log(error)
+        })
+    
+    }
+
+
+    const [deleted, setDeleted] = useState(false);
+
+
+    // if(setDeleted == true){
+    //     props.checkIfDeleted();
+    // }
 
 
 
@@ -39,10 +50,12 @@ function CardComp(props) {
 
             
             <CardActions>
-            <Button>Learn more about Teacher</Button>
-            <IconButton onClick={() => console.log("hello")}><DeleteOutlineOutlinedIcon/></IconButton>
+            <Button onClick={() => console.log(props.employeeId)}>Learn more about Teacher</Button>
+            <IconButton onClick={deleteEmployee}><DeleteOutlineOutlinedIcon/></IconButton>
             </CardActions>
 
+
+    
         
 
 

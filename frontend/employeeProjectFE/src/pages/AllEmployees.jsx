@@ -6,7 +6,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { padding } from "@mui/system";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import { Api } from "@mui/icons-material";
+import { Api, Co2Sharp } from "@mui/icons-material";
 import { useEffect, useState} from "react";
 import CardComp from "../Components/CardComp";
 
@@ -15,8 +15,6 @@ import CardComp from "../Components/CardComp";
 
 
 
-
-    const allEmployees = [];
 
  
  function AllEmployees(){
@@ -59,6 +57,13 @@ import CardComp from "../Components/CardComp";
 
 
 
+
+    function checkIfEmployeeDeleted(){
+
+        refreshEmployees();
+
+    }
+
   
 
 
@@ -67,7 +72,7 @@ import CardComp from "../Components/CardComp";
         
 
 
-        <Container xs={12} md={12} lg={6} xl={4} sx={{display:"flex", flexDirection:"column", gap:1, marginTop:15, border:"5px solid green"}}>
+        <Container xs={12} md={12} lg={6} xl={4} sx={{display:"flex", flexDirection:"column", gap:1, marginTop:15}}>
                     <Typography variant="h2" align="center" color="textPrimary" gutterBottom>Employee Page</Typography>
                     <Typography variant="h5" align="center" color="textSecondary" paragraphy>This page displays a list of all employees </Typography>
 
@@ -92,10 +97,10 @@ import CardComp from "../Components/CardComp";
 
 
 
-                            <Grid item container justifyContent={"center"} sx={{border: "5px solid red"}} direction={"row"} spacing={2} >
+                            <Grid item container justifyContent={"center"} sx={{}} direction={"row"} spacing={2} >
 
                               {employees.map(emp => (
-                                  <Grid item>  <CardComp  employeeName={emp.name} {...emp} key={emp.id} employeeDepartment={emp.departmentName}/> </Grid>
+                                  <Grid item>  <CardComp employeeName={emp.name} {...emp} key={emp.id} employeeId={emp.id} employeeDepartment={emp.departmentName} checkIfDeleted={checkIfEmployeeDeleted}/> </Grid>
 
 
                                 ) )}
