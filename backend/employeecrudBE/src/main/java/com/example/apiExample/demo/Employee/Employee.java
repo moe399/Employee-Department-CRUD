@@ -24,7 +24,7 @@ public class Employee {
     @Getter private Long id;
     @Getter @Setter private String name;
     @Getter @Setter private String email;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     @Getter(AccessLevel.PACKAGE) @Setter(AccessLevel.PACKAGE) private Department department;
 

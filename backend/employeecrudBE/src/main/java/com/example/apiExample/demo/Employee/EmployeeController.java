@@ -71,8 +71,8 @@ public class EmployeeController {
     }
 
     @PutMapping("/employee/{empid}")
-    public void editEmployee(@PathVariable(name = "empid")Long emp_id,@PathVariable(name = "id") Long dept_id, @RequestParam(name = "name")String newName, @RequestParam(name = "email")String newEmail){
-        employeeService.editEmployee(emp_id, newName, newEmail, dept_id);
+    public void editEmployee(@PathVariable(name = "empid")Long emp_id, @RequestParam(name = "department_id") Long department_id, @RequestParam(name = "name")String newName, @RequestParam(name = "email")String newEmail){
+        employeeService.editEmployee(emp_id, newName, newEmail, department_id);
     }
 
     @DeleteMapping("/employee/{empid}")

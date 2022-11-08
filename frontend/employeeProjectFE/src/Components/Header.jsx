@@ -1,24 +1,34 @@
-import {CssBaseline, AppBar, Toolbar, Typography} from "@mui/material";
+import { CssBaseline, AppBar, Toolbar, Typography, Container, IconButton } from "@mui/material";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Link } from "react-router-dom";
+
 
 
 function Header() {
     return (
 
         <>
-        <CssBaseline/>
-        <AppBar position="relative">
+            <CssBaseline />
+            <AppBar position="relative">
 
-        <Toolbar>
-            
-            <MenuBookIcon></MenuBookIcon>
-        <Typography variant="h6">Api Test</Typography>
-            
-        </Toolbar>
-        </AppBar>
+                <Toolbar>
 
-</>
-      );
+                    
+                    <Container sx={{ display: "flex", justifyContent: "center" }}>
+
+                        
+                        <MenuBookIcon/>
+                        <Typography variant="h6">Api Test</Typography>
+                       
+                    </Container>
+                    
+                 
+
+                </Toolbar>
+            </AppBar>
+
+        </>
+    );
 }
 
 export default Header;
