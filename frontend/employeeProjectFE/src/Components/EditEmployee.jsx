@@ -39,7 +39,7 @@ function EditEmployee(props) {
   const [employeeId, setEmployeeId] = useState(props.employeeId);
   const [newEmployeeName, setNewEmployeeName] = useState(props.employeeName);
   const [newEmployeeEmail, setNewEmployeeEmail] = useState(props.employeeEmail);
-  const [newEmployeeDepartment, setNewEmployeeDepartment] = useState(props.employeeDepartment);
+  const [newEmployeeDepartment, setNewEmployeeDepartment] = useState(props.employeeDepartmentID);
 
   const style = {
     position: 'absolute',
@@ -92,7 +92,7 @@ function EditEmployee(props) {
             <Container sx={{ display: "flex", gap: 4 }}>
               <Button variant="contained" onClick={() => { handleSubmit() }} >Submit</Button>
               <Button variant="outlined" color="error" onClick={props.closeModal} >Cancel</Button>
-              <Button onClick={() => console.log(departmentsFromDB)}>Test</Button>
+              
             </Container>
           </Container>
         </Box>

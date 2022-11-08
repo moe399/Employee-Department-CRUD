@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, CSS, IconButton, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, CSS, IconButton, Link, Typography } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,7 +10,7 @@ import EditEmployee from "./EditEmployee";
 
 
 
-function CardComp(props) {
+function EmployeeCardComp(props) {
     const [modalState, setModalState] = useState(false);
 
     function closeModal() {
@@ -32,9 +32,9 @@ function CardComp(props) {
                 <CardMedia>
 
                     <CardContent>
-                        <Typography variant="h4">{props.employeeName}</Typography>
+                        <Typography variant="h5">{props.employeeName}</Typography>
                         <Typography variant="h6">Works in: {props.employeeDepartment} Department </Typography>
-
+                        <Typography variant="h7">Email: <Link to="#" onClick={(event) => {window.location = `mailto:${props.employeeEmail}`}}>{props.employeeEmail}</Link></Typography>
                     </CardContent>
 
 
@@ -43,9 +43,10 @@ function CardComp(props) {
                         <IconButton onClick={() => setModalState(true)}><ModeIcon /></IconButton>
                         <IconButton onClick={deleteEmployee}><DeleteOutlineOutlinedIcon /></IconButton>
                     </CardActions>
-                    <Typography>{props.employeeEmail}</Typography>
+                
+
                 </CardMedia>
-                <EditEmployee modalState={modalState} closeModal={closeModal} employeeId={props.employeeId} employeeName={props.employeeName} employeeEmail={props.employeeEmail} employeeDepartment={props.employeeDepartment} />
+                <EditEmployee modalState={modalState} closeModal={closeModal} employeeId={props.employeeId} employeeName={props.employeeName} employeeEmail={props.employeeEmail} employeeDepartment={props.employeeDepartment} employeeDepartmentID={props.employeeDepartmentID} />
 
             </Card>
 
@@ -53,4 +54,4 @@ function CardComp(props) {
     );
 }
 
-export default CardComp;
+export default EmployeeCardComp;

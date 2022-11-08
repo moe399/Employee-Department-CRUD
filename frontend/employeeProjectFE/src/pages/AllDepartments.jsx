@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Add, Api, Co2Sharp } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import CardComp from "../Components/CardComp";
 import AddEmployee from "../Components/AddEmployee";
 
 
@@ -27,7 +26,7 @@ function AllDepartments() {
 
                     <Grid container spacing={2} justifyContent="center">
                         <Grid item sx>
-                            <Link to="/employees"><Button variant="contained" color="primary" >Refresh</Button></Link>
+                            <Link to="/employees"><Button variant="contained" color="primary">Refresh</Button></Link>
                         </Grid>
 
                         <Grid item>

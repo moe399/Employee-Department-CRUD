@@ -50,6 +50,10 @@ public class Employee {
 
     }
 
+    public Long getDepartmentId(){
+        return department.getId();
+    }
+
 
 
 

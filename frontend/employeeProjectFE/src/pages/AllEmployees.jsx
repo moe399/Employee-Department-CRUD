@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Add, Api, Co2Sharp } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import CardComp from "../Components/CardComp";
+import EmployeeCardComp from "../Components/EmployeeCardComp";
 import AddEmployee from "../Components/AddEmployee";
 
 
@@ -67,7 +67,7 @@ function AllEmployees() {
 
                         <Grid item container justifyContent={"center"} sx={{}} direction={"row"} spacing={2} >
                             {employees.map(emp => (
-                                <Grid item>  <CardComp refreshEmployees={refreshEmployees} employeeName={emp.name} {...emp} key={emp.id} employeeId={emp.id} employeeDepartment={emp.departmentName} employeeEmail={emp.email} checkIfDeleted={checkIfEmployeeDeleted} /> </Grid>
+                                <Grid item>  <EmployeeCardComp refreshEmployees={refreshEmployees} employeeName={emp.name} {...emp} key={emp.id} employeeId={emp.id} employeeDepartment={emp.departmentName} employeeDepartmentID={emp.departmentId} employeeEmail={emp.email} checkIfDeleted={checkIfEmployeeDeleted} /> </Grid>
                             ))}
                         </Grid>
                     </Grid>
