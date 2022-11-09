@@ -1,6 +1,6 @@
 import { Box, Modal, Typography, Container, Grid, Button, TextField, Select, MenuItem, getToggleButtonUtilityClass } from "@mui/material";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 import axios from "axios";
 
@@ -20,6 +20,7 @@ function AddEmployee(props) {
     props.closeModal()
   }
 
+  // const [onGetDepartments, setOnGetDepartments] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [employeeName, setEmployeeName] = useState("");
   const [employeeEmail, setEmployeeEmail] = useState("");
@@ -44,13 +45,17 @@ function AddEmployee(props) {
     console.log(event.value.name)
 
   }
+
+
   useEffect(() => {
 
 
+
     axios.get("http://localhost:8080/department")
-      .then(result => setDepartments(result.data))
-      .catch(error => console.log(error))
-  }, [])
+    .then(result => setDepartments(result.data))
+    .catch(error => console.log(error))
+    
+  },[props.modalState])
 
 
   const style = {
@@ -111,6 +116,7 @@ function AddEmployee(props) {
             <Container sx={{ display: "flex", gap: 4 }}>
               <Button variant="contained" onClick={() => { handleSubmitA() }}>Submit</Button>
               <Button variant="outlined" color="error" onClick={() => props.closeModal()}>Cancel</Button>
+              <Button onClick={() => {console.log(departments)}}>Test</Button>
             </Container>
           </Container>
         </Box>

@@ -39,7 +39,6 @@ function EmployeeCardComp(props) {
 
 
                     <CardActions>
-                        <IconButton onClick={() => console.log(props.employeeId)}><InfoIcon /></IconButton>
                         <IconButton onClick={() => setModalState(true)}><ModeIcon /></IconButton>
                         <IconButton onClick={deleteEmployee}><DeleteOutlineOutlinedIcon /></IconButton>
                     </CardActions>

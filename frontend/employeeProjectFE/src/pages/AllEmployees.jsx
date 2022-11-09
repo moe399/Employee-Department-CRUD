@@ -21,6 +21,7 @@ function AllEmployees() {
     const [departments, setDepartments] = useState([]);
 
 
+
     const [addDepartmentModalState, setAddDepartmentModalState] = useState(false);
 
 
@@ -52,6 +53,7 @@ function AllEmployees() {
         setAddDepartmentModalState(false)
         setAddADepartmentForm(true)
         getDepartments();
+      
     }
 
     function closeAddDepartmentForm() {
@@ -70,6 +72,9 @@ function AllEmployees() {
         }, 300)
 
     }
+
+
+ 
 
 
     function refreshEmployees() {
@@ -116,13 +121,7 @@ function AllEmployees() {
                         </Grid>
 
                         <Grid item>
-                            <Button variant="outlined" color="primary" onClick={() => {
-
-                                departments.length == 0 ? setAddDepartmentModalState(true) : setModalState(true)
-                            }
-
-
-                            } >Add an employee</Button>
+                            <Button variant="outlined" color="primary" onClick={() => {departments.length == 0 ? setAddDepartmentModalState(true) : setModalState(true)} }>Add an employee</Button>
                         </Grid>
 
                         <Grid item container justifyContent={"center"} sx={{}} direction={"row"} spacing={2} >
@@ -134,7 +133,19 @@ function AllEmployees() {
                 </div>
 
 
-                <AddEmployee modalState={modalState} closeModal={closeModal} />
+                    
+                               
+                  
+           
+
+
+               {/* { departments.length == 0 ? setAddDepartmentModalState(true) : (<h1>aaa</h1>)} */}
+
+
+
+            
+                
+                <AddEmployee modalState={modalState} closeModal={closeModal} departments={departments} /> 
 
                 <SendToDepartmentModal modalState={addDepartmentModalState} closeModal={closeAddEmployeeModal} addDepartmentForm={openAddDepartmentForm} />
 
