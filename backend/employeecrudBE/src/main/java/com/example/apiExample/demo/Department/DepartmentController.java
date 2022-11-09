@@ -23,7 +23,7 @@ public class DepartmentController {
 
     // DELETE ONE(REQUESTBODY) - DELETE
 
-    @GetMapping(path = "department")
+    @GetMapping(path = "/department")
     public List<Department> getDepartments() {
 
         return departmentService.getDepartments();
@@ -46,9 +46,9 @@ public class DepartmentController {
 
 
     @PostMapping(path = "/department")
-    public void addDepartment(@RequestBody Department department) {
+    public void addDepartment(@RequestParam(name="departmentName") String departmentName) {
 
-        departmentService.addDepartment(department);
+        departmentService.addDepartment(departmentName);
 
     }
 
@@ -63,7 +63,7 @@ public class DepartmentController {
     @DeleteMapping("/department/{id}")
     public void deleteDepartment(@PathVariable(name = "id") Long id){
 
-        deleteDepartment(id);
+       departmentService.deleteDepartment(id);
     }
 
 }

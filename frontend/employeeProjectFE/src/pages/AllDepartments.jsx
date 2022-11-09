@@ -9,11 +9,45 @@ import axios from "axios";
 import { Add, Api, Co2Sharp } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import AddEmployee from "../Components/AddEmployee";
+import DepartmentCard from "../Components/DepartmentCard";
+import AddDepartment from "../Components/AddDepartment";
+
+
 
 
 function AllDepartments() {
 
+    function handleClose(){
+        setAddDepartmentModalState(false);
+        refresh();
+    }
 
+    const [departments, setDepartments] = useState([]);
+
+    const [addDepartmentModalState, setAddDepartmentModalState] = useState(false);
+    
+
+    useEffect(() => {
+        getDepartments();
+    }, [])
+
+    function getDepartments() {
+        axios.get("http://localhost:8080/department")
+          .then(res => {
+            setDepartments(res.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    
+      function refresh(){
+
+        setTimeout(() => {
+            getDepartments();
+        }, 500)
+
+      }
 
 
 
@@ -24,16 +58,39 @@ function AllDepartments() {
                 <Typography variant="h5" align="center" color="textSecondary" paragraphy>This page displays a list of all departments </Typography>
                 <div>
 
-                    <Grid container spacing={2} justifyContent="center">
+
+                    <Grid sx={{display: "flex", flexDirection:"column", gap: 10}}>
+
+                    <Grid item container spacing={2} justifyContent="center">
                         <Grid item sx>
-                            <Link to="/employees"><Button variant="contained" color="primary">Refresh</Button></Link>
+                            <Link to="#"><Button variant="contained" color="primary" onClick={() => refresh()}>Refresh</Button></Link>
                         </Grid>
 
                         <Grid item>
-                            <Button variant="outlined" color="primary" >Add a department</Button>
+                            <Button variant="outlined" color="primary" onClick={() => setAddDepartmentModalState(true)}>Add a department</Button>
+                           
                         </Grid>
+
                        
                     </Grid>
+
+                    <Grid item container spacing ={2} justifyContent="center" >
+                    {departments.map((depts) => {
+
+                        return(
+                           <Grid item> <DepartmentCard refresh={refresh} departmentName={depts.name} numberOfEmployees={depts.numberOfEmployeesInDepartment} departmentId={depts.id}/></Grid>
+                        )
+
+                    })}
+
+
+                    </Grid>
+
+
+                    </Grid>
+
+                    <AddDepartment handleClose={handleClose}modalState={addDepartmentModalState}/>
+
                 </div>
                
             </Container>

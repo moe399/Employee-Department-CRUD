@@ -52,9 +52,13 @@ public class DepartmentService {
 
     //ADD ONE - HTTP/POST
 
-    public void addDepartment(Department department){
+    public void addDepartment(String name){
 
-        departmentRepository.save(department);
+        Department newDepartment = new Department();
+
+        newDepartment.setName(name);
+
+        departmentRepository.save(newDepartment);
 
 
     }
