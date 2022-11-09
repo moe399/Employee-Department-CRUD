@@ -15,15 +15,6 @@ import axios from "axios";
 
 function DepartmentCard(props) {
 
-    let headers = {
-
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Accept':"*/*",
-        'crossorigin':'true',
-     
-       
-    }
 
 
     const [listModalState, setListModalState] = useState(false);
@@ -46,7 +37,7 @@ function DepartmentCard(props) {
     }
 
     function deleteDepartment(){
-        axios.delete(`http://localhost:8080/${props.departmentId}`, headers)
+        axios.delete(`http://localhost:8080/department/${props.departmentId}`)
         .then(result => console.log(result.status))
         .catch(error => {console.log(error)})
         props.refresh();

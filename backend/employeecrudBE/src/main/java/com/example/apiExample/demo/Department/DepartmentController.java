@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
 @RestController
 public class DepartmentController {
 
@@ -60,10 +60,19 @@ public class DepartmentController {
 
     }
 
-    @DeleteMapping("/department/{id}")
-    public void deleteDepartment(@PathVariable(name = "id") Long id){
 
-       departmentService.deleteDepartment(id);
+//    @DeleteMapping("/department{id}")
+////    @ResponseBody
+//    public void deleteDepartment(@PathVariable(name = "id") Long id){
+//
+////       departmentService.deleteDepartment(id);
+//
+//        System.out.println("Reached controller");
+//    }
+
+    @RequestMapping(value = "/department/{id}", method = RequestMethod.DELETE)
+    public void deleteDepartment(@PathVariable(name = "id") Long id){
+        departmentService.deleteDepartment(id);
     }
 
 }

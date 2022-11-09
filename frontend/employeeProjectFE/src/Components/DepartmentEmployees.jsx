@@ -26,6 +26,7 @@ function DepartmentEmployees (props) {
     useEffect(() => {
 
         getEmployeesWithinDepartment()
+        
     }, [])
 
 

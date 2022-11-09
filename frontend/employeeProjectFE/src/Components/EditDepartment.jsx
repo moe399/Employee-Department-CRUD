@@ -5,31 +5,19 @@ import axios from "axios";
 
 function EditDepartment(props) {
 
-    
-    const [departmentName, setDepartmentName] = useState(props.departmentName);
 
-    let headers = {
-
-        'Access-Control-Allow-Origin': 'http://localhost:3000'
-       
-    }
+  const [departmentName, setDepartmentName] = useState(props.departmentName);
 
 
   function handleSubmit() {
 
-
-    
-
-    axios.put(`http://localhost:8080/department/${props.departmentId}?name=${departmentName}`, headers)
-    .then(result => {console.log("http://localhost:8080/department/${props.departmentId}?name=${setDepartmentName}")})
-    .catch(error => {console.log(error)})
+    axios.put(`http://localhost:8080/department/${props.departmentId}?name=${departmentName}`)
+      .then(result => { console.log("http://localhost:8080/department/${props.departmentId}?name=${setDepartmentName}") })
+      .catch(error => { console.log(error) })
 
     props.closeModal();
 
   }
-
-
-
 
 
   const style = {
@@ -58,10 +46,10 @@ function EditDepartment(props) {
           <Container sx={{ display: "flex", flexDirection: "column", gap: 5, justifyContent: "center" }}>
 
             <TextField
-            label = "Name"
-            defaultValue={departmentName}
-            onChange={(event)=> {setDepartmentName(event.target.value)}}
-            
+              label="Name"
+              defaultValue={departmentName}
+              onChange={(event) => { setDepartmentName(event.target.value) }}
+
             ></TextField>
 
 
@@ -69,7 +57,7 @@ function EditDepartment(props) {
               <Button variant="contained" onClick={() => { handleSubmit() }} >Submit</Button>
               <Button variant="outlined" color="error" onClick={props.closeModal} >Cancel</Button>
               <Button onClick={() => console.log(props.departmentId)}>test</Button>
-              
+
             </Container>
           </Container>
 

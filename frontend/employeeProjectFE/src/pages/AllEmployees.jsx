@@ -10,13 +10,28 @@ import { Add, Api, Co2Sharp } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import EmployeeCardComp from "../Components/EmployeeCardComp";
 import AddEmployee from "../Components/AddEmployee";
+import SendToDepartmentModal from "../Components/SendToDepartmentModal";
+import AddDepartment from "../Components/AddDepartment";
 
 
 function AllEmployees() {
 
     const [employees, setEmployees] = useState([]);
     const [modalState, setModalState] = useState(false);
+    const [departments, setDepartments] = useState([]);
 
+
+    const [addDepartmentModalState, setAddDepartmentModalState] = useState(false);
+
+
+    const [addADepartmentForm, setAddADepartmentForm] = useState(false);
+
+
+    function getDepartments() {
+        axios.get("http://localhost:8080/department")
+            .then(res => setDepartments(res.data))
+            .catch(error => console.log(error))
+    }
 
     function closeModal() {
 
@@ -25,6 +40,37 @@ function AllEmployees() {
         console.log("here")
 
     }
+
+    function closeAddEmployeeModal() {
+        setAddDepartmentModalState(false);
+        getDepartments();
+    }
+
+
+    function openAddDepartmentForm() {
+        console.log("reached this part")
+        setAddDepartmentModalState(false)
+        setAddADepartmentForm(true)
+        getDepartments();
+    }
+
+    function closeAddDepartmentForm() {
+        setAddADepartmentForm(false);
+        refreshDepartments();
+    }
+
+
+
+    function refreshDepartments() {
+
+        setTimeout(() => {
+
+            getDepartments();
+
+        }, 300)
+
+    }
+
 
     function refreshEmployees() {
         axios.get("http://localhost:8080/employee")
@@ -35,6 +81,8 @@ function AllEmployees() {
                 console.log(error);
             })
         console.log("refreshed employees")
+
+        refreshDepartments()
     }
 
     useEffect(() => {
@@ -42,7 +90,13 @@ function AllEmployees() {
             .then(res => {
                 setEmployees(res.data);
             })
-    }, []);
+
+        getDepartments();
+    },
+
+
+
+        []);
 
     function checkIfEmployeeDeleted() {
         refreshEmployees();
@@ -62,7 +116,13 @@ function AllEmployees() {
                         </Grid>
 
                         <Grid item>
-                            <Button variant="outlined" color="primary" onClick={() => setModalState(true)} >Add an employee</Button>
+                            <Button variant="outlined" color="primary" onClick={() => {
+
+                                departments.length == 0 ? setAddDepartmentModalState(true) : setModalState(true)
+                            }
+
+
+                            } >Add an employee</Button>
                         </Grid>
 
                         <Grid item container justifyContent={"center"} sx={{}} direction={"row"} spacing={2} >
@@ -72,7 +132,14 @@ function AllEmployees() {
                         </Grid>
                     </Grid>
                 </div>
+
+
                 <AddEmployee modalState={modalState} closeModal={closeModal} />
+
+                <SendToDepartmentModal modalState={addDepartmentModalState} closeModal={closeAddEmployeeModal} addDepartmentForm={openAddDepartmentForm} />
+
+                <AddDepartment modalState={addADepartmentForm} handleClose={closeAddDepartmentForm} />
+
             </Container>
         </>
     )

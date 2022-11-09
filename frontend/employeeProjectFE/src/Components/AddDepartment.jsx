@@ -14,9 +14,8 @@ function AddDepartment(props) {
     axios.post(`http://localhost:8080/department?departmentName=${departmentName}`)
     .then(result => {console.log(result.status)})
     .catch(error => {console.log(error)})
-
-   
     props.handleClose();
+    
 
    }
 
@@ -48,7 +47,7 @@ function AddDepartment(props) {
     <Grid justifyContent={"center"}>
     <Container sx={{ display: "flex", gap: 4, justifyContent:"center" }}>
               <Button variant="contained" onClick={() => handleSubmit()} >Submit</Button>
-              <Button variant="outlined" color="error">Cancel</Button>
+              <Button variant="outlined" color="error" onClick={() => props.handleClose()}>Cancel</Button>
               <Button onClick={() => console.log(departmentName())}>Test</Button>
             </Container>
             </Grid>
