@@ -1,32 +1,32 @@
-import {Modal, Box, Typography, Button, List, ListItem, ListItemIcon, IconButton, ListItemText} from "@mui/material";
-import {useState, useEffect} from "react";
+import { Modal, Box, Typography, Button, List, ListItem, ListItemIcon, IconButton, ListItemText } from "@mui/material";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteOutlineOutlined from "@mui/icons-material/DeleteOutlineOutlined";
 import { DeleteOutlined } from "@mui/icons-material";
 
 
-function DepartmentEmployees (props) {
+function DepartmentEmployees(props) {
 
     const [employeesWithinDepartment, setEmployeesWithinDpeartment] = useState([]);
 
-    function getEmployeesWithinDepartment(){
+    function getEmployeesWithinDepartment() {
 
         axios.get(`http://localhost:8080/department/${props.departmentId}/employee`)
-        .then(res => {setEmployeesWithinDpeartment(res.data)})
-        .catch(error => {console.log(error)})
+            .then(res => { setEmployeesWithinDpeartment(res.data) })
+            .catch(error => { console.log(error) })
 
     }
 
-    function deleteEmployee(employeeId){
+    function deleteEmployee(employeeId) {
         axios.delete(`http://localhost:8080/employee/${employeeId}`)
-        .catch(error => {console.log(error)})
+            .catch(error => { console.log(error) })
     }
 
 
     useEffect(() => {
 
         getEmployeesWithinDepartment()
-        
+
     }, [])
 
 
@@ -46,53 +46,54 @@ function DepartmentEmployees (props) {
         flexDirection: "column",
         gap: 4,
 
-      };
+    };
 
 
-    return ( 
+    return (
 
         <>
 
-        <Modal 
-        sx={{overflow:"scroll", height: "100%"}}
-        open={props.modalState}
-        onClose={props.closeModal}
-        
-        > 
-        
+            <Modal
+                sx={{ overflow: "scroll", height: "100%" }}
+                open={props.modalState}
+                onClose={props.closeModal}
 
-        <Box sx={style}>
-
-        <Typography variant="h6">Employees within {props.departmentName} Department</Typography>
+            >
 
 
-        <List>
-            {employeesWithinDepartment.map(employee => {
+                <Box sx={style}>
 
-                return(
+                    <Typography variant="h6">Employees within {props.departmentName} Department</Typography>
 
-                    <>
-        <ListItem><ListItemText>{employee.name} </ListItemText><IconButton onClick={() => {deleteEmployee(employee.id)}} edge="end"><DeleteOutlineOutlined/></IconButton></ListItem>
-  
+
+                    <List>
+                        {employeesWithinDepartment.map(employee => {
+
+                            return (
+
+                                <>
+                                    <ListItem><ListItemText>{employee.name} </ListItemText><IconButton onClick={() => { deleteEmployee(employee.id) }} edge="end"><DeleteOutlineOutlined /></IconButton></ListItem>
+
+
+                                </>
+
+                            )
+                        })}
+
+
+                    </List>
+
+
+
+                </Box>
+
+
+
+
+            </Modal>
 
         </>
-                
-          )  })}
-            
-       
-        </List>
-
-
-
-        </Box>
-
-
-
-
-        </Modal>
-
-        </>
-     );
+    );
 }
 
 

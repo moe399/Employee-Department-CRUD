@@ -20,6 +20,8 @@ function AllEmployees() {
     const [modalState, setModalState] = useState(false);
     const [departments, setDepartments] = useState([]);
 
+    const [triggerUseEffect, setTriggerUseEffect] = useState();
+
 
 
     const [addDepartmentModalState, setAddDepartmentModalState] = useState(false);
@@ -145,7 +147,7 @@ function AllEmployees() {
 
             
                 
-                <AddEmployee modalState={modalState} closeModal={closeModal} departments={departments} /> 
+                <AddEmployee modalState={modalState} closeModal={closeModal} departments={departments} triggerUseEffect={triggerUseEffect}/> 
 
                 <SendToDepartmentModal modalState={addDepartmentModalState} closeModal={closeAddEmployeeModal} addDepartmentForm={openAddDepartmentForm} />
 
